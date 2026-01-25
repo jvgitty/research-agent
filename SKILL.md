@@ -155,22 +155,16 @@ Use TaskOutput to get the script results before proceeding to synthesis.
 
 ## Judge Agent: Synthesize All Sources
 
-**After all searches complete, display:**
-```
-✅ All agents reported back!
-├─ 🟠 Reddit: {n} threads collected
-├─ 🔵 X: {n} posts captured
-└─ 🌐 Web: {n} pages found
+**After all searches complete, internally synthesize (don't display stats yet):**
 
-⚖️ Judge Agent: Weighing the evidence...
-```
+The Judge Agent must:
+1. Weight Reddit/X sources HIGHER (they have engagement signals: upvotes, likes)
+2. Weight WebSearch sources LOWER (no engagement data)
+3. Identify patterns that appear across ALL three sources (strongest signals)
+4. Note any contradictions between sources
+5. Extract the top 3-5 actionable insights
 
-**The Judge Agent must:**
-1. 🏆 Weight Reddit/X sources HIGHER (they have engagement signals: upvotes, likes)
-2. 📉 Weight WebSearch sources LOWER (no engagement data)
-3. 🔗 Identify patterns that appear across ALL three sources (strongest signals)
-4. ⚠️ Note any contradictions between sources
-5. 💡 Extract the top 3-5 actionable insights
+**Do NOT display stats here - they come at the end, right before the invitation.**
 
 ---
 
