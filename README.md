@@ -63,6 +63,32 @@ git clone https://github.com/mvanhorn/last30days-skill.git ~/.agents/skills/last
 
 Same SKILL.md, same Python engine, same scripts. The `agents/openai.yaml` provides Codex-specific discovery metadata. Invoke with `$last30days` or through the `/skills` menu.
 
+### Open Variant (Watchlist + Briefings)
+
+The repo includes an **open variant** that adds persistent knowledge accumulation on top of the one-shot research engine:
+
+- **Watchlist** — Track topics over time with `watch add "topic"`, run research on a schedule
+- **Briefings** — Daily/weekly digests synthesized from accumulated findings
+- **History** — Query and search your research database with full-text search
+- **Native web search** — Built-in web search backends (Parallel AI, Brave, OpenRouter) run alongside Reddit/X/YouTube
+
+To use the open variant instead of the default one-shot skill:
+
+```bash
+cp variants/open/SKILL.md ~/.claude/skills/last30days/SKILL.md
+```
+
+Both variants use the same Python engine and scripts directory. The open variant adds command routing (`watch`, `briefing`, `history`) and references mode-specific instruction files.
+
+**Optional web search API keys** (add to `~/.config/last30days/.env`):
+```bash
+PARALLEL_API_KEY=...    # Parallel AI (preferred — LLM-optimized results)
+BRAVE_API_KEY=...       # Brave Search (free tier: 2,000 queries/month)
+OPENROUTER_API_KEY=...  # OpenRouter/Perplexity Sonar Pro
+```
+
+Check source availability: `python3 scripts/last30days.py --diagnose`
+
 ## Usage
 
 ```
@@ -803,6 +829,9 @@ This example shows /last30days discovering **emerging developer workflows** - re
 | `--debug` | Verbose logging for troubleshooting |
 | `--sources=reddit` | Reddit only |
 | `--sources=x` | X only |
+| `--include-web` | Add native web search alongside Reddit/X (requires web search API key) |
+| `--store` | Persist findings to SQLite database for watchlist/briefing integration |
+| `--diagnose` | Show source availability diagnostics (API keys, Bird, YouTube, web backends) and exit |
 
 ## Requirements
 
