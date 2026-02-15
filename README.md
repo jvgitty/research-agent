@@ -1,8 +1,11 @@
 # /last30days v2.1
 
-**The AI world reinvents itself every month. This Claude Code skill keeps you current.** /last30days researches your topic across Reddit, X, and the web from the last 30 days, finds what the community is actually upvoting and sharing, and writes you a prompt that works today, not six months ago. Whether it's Ralph Wiggum loops, Suno music prompts, or the latest Midjourney techniques, you'll prompt like someone who's been paying attention.
+**The AI world reinvents itself every month. This Claude Code skill keeps you current.** /last30days researches your topic across Reddit, X, YouTube, and the web from the last 30 days, finds what the community is actually upvoting, sharing, and saying on camera, and writes you a prompt that works today, not six months ago. Whether it's Ralph Wiggum loops, Suno music prompts, or the latest Midjourney techniques, you'll prompt like someone who's been paying attention.
 
-**New in V2.1:** X search is now fully bundled - no external `bird` CLI or xAI API key needed for X. Just have Node.js 22+ installed. Uses a vendored subset of Bird's Twitter GraphQL client (MIT licensed, originally by [@steipete](https://x.com/steipete)). **YouTube search** is now a 4th source - automatically searches YouTube and extracts transcripts via yt-dlp when installed. Inspired by [@steipete](https://x.com/steipete)'s yt-dlp + [summarize](https://github.com/steipete/summarize) toolchain approach.
+**New in V2.1 — two headline features:**
+
+- **YouTube transcripts as a 4th source.** When yt-dlp is installed, /last30days automatically searches YouTube, grabs view counts, and extracts auto-generated transcripts from the top videos. A 20-minute review contains 10x the signal of a tweet — now the skill reads it. Inspired by [@steipete](https://x.com/steipete)'s yt-dlp + [summarize](https://github.com/steipete/summarize) toolchain.
+- **X search is fully bundled.** No external `bird` CLI or xAI API key needed. Just Node.js 22+ and your browser cookies. Uses a vendored subset of Bird's Twitter GraphQL client (MIT licensed, originally by [@steipete](https://x.com/steipete)).
 
 **New in V2:** Dramatically better search results. Smarter query construction finds posts that V1 missed entirely, and a new two-phase search automatically discovers key @handles and subreddits from initial results, then drills deeper. Free X search (no xAI key needed), `--days=N` for flexible lookback, and automatic model fallback. [Full changelog below.](#whats-new-in-v2)
 
@@ -22,19 +25,30 @@ git clone https://github.com/mvanhorn/last30days-skill.git ~/.claude/skills/last
 mkdir -p ~/.config/last30days
 cat > ~/.config/last30days/.env << 'EOF'
 OPENAI_API_KEY=sk-...
-XAI_API_KEY=xai-...       # optional - not needed for X search in v2.1
+XAI_API_KEY=xai-...       # optional — cookie auth is default for X search
 EOF
 chmod 600 ~/.config/last30days/.env
 ```
 
 ### X Search Authentication
 
-V2.1 bundles X search directly - no external tools needed. Just be logged into x.com in Safari, Chrome, or Firefox and it auto-detects your session cookies.
+X search reads your existing browser cookies — no API keys or login commands needed.
 
-Alternatively, set environment variables:
+**Safari (recommended on Mac):** Just be logged into x.com. No setup needed.
+
+**Chrome:** Works, but macOS will prompt you to allow Keychain access the first time. Click "Allow" (or "Always Allow" to stop future prompts).
+
+**Firefox:** Just be logged into x.com. No setup needed.
+
+**Manual fallback:** If cookie auto-detection doesn't work, set these env vars (grab them from your browser's dev tools → Application → Cookies → x.com):
 ```bash
-export AUTH_TOKEN=your_auth_token    # from x.com cookies
-export CT0=your_ct0_token            # from x.com cookies
+export AUTH_TOKEN=your_auth_token
+export CT0=your_ct0_token
+```
+
+**Verify it's working:**
+```bash
+node ~/.claude/skills/last30days/scripts/lib/vendor/bird-search/bird-search.mjs --whoami
 ```
 
 **Requirements:** Node.js 22+ (for the vendored Twitter GraphQL client).
@@ -864,6 +878,6 @@ Thanks to the contributors who helped shape V2:
 
 ---
 
-*30 days of research. 30 seconds of work.*
+*30 days of research. 30 seconds of work. Four sources. Zero stale prompts.*
 
-*Prompt research. Trend discovery. Expert answers.*
+*Reddit. X. YouTube. Web. — All synthesized into expert answers and copy-paste prompts.*
