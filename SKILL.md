@@ -10,6 +10,15 @@ allowed-tools: Bash, Read, Write, AskUserQuestion, WebSearch
 
 Research ANY topic across Reddit, X, YouTube, and the web. Surface what people are actually discussing, recommending, and debating right now.
 
+## PAIN-POINTS ROUTING (Check First)
+
+If the user's input starts with or contains "pain-points" or "pain " (with space) followed by a demographic:
+- **Read** `variants/pain-points/SKILL.md` (resolve path via SKILL_ROOT discovery below)
+- **Follow** its instructions exactly
+- **Stop** — do not continue with standard research flow below
+
+---
+
 ## CRITICAL: Parse User Intent
 
 Before doing anything, parse the user's input for:

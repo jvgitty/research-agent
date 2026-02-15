@@ -98,6 +98,19 @@ The open variant adds four modes on top of one-shot research:
 
 Both variants use the same Python engine and scripts directory. The open variant adds command routing (`watch`, `briefing`, `history`) and references mode-specific instruction files.
 
+### Pain-Points Mode
+
+Research latent and powerful pain points for a target demographic using a structured context-orchestration methodology. Use `last30 pain-points [demographic]` or `last30 pain [demographic]`:
+
+```
+last30 pain-points SMB founders in B2B SaaS
+last30 pain indie game devs
+```
+
+**Output:** A structured pain points report with Executive Summary, Detailed Findings (scored by Latency 1–3 and Power 1–3), and Methodology Note. Each pain point requires ≥2 distinct sources with verbatim quotes.
+
+**Pain-points-only install:** `cp variants/pain-points/SKILL.md SKILL.md` for a pain-points-focused skill.
+
 **Optional web search API keys** (add to `~/.config/last30days/.env`):
 ```bash
 PARALLEL_API_KEY=...    # Parallel AI (preferred  - LLM-optimized results)
@@ -119,6 +132,7 @@ Examples:
 - `/last30days iOS app mockups for Nano Banana Pro`
 - `/last30days What are the best rap songs lately`
 - `/last30days remotion animations for Claude Code`
+- `last30 pain-points SMB founders in B2B SaaS` (pain-points mode)
 
 ## What It Does
 
